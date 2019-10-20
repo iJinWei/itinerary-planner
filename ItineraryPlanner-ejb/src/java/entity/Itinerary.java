@@ -28,23 +28,20 @@ public class Itinerary implements Serializable {
     private Date startDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    @Lob
-    private byte[] coverPhoto;
     private String title;
     private String caption;
-    private boolean isPublished;
-    private boolean isCompleted;
-    private List<String> countryList;
     private List<String> placeList;
 
     @ManyToMany(mappedBy = "itineraryList")
     private List<Users> usersList;
-    @ManyToMany(mappedBy = "itineraryList")
-    private List<Hashtag> hashtagList;
-    @OneToMany
-    private List<Activity> activityList;
-    @OneToMany(mappedBy = "itinerary")
+    
+    @OneToMany (mappedBy= "itinerary")
+    private List<Event> eventList;
+    
+    @OneToMany //uni direction
     private List<Comment> commentList;
+    @OneToMany //uni direction
+    private List<Photo> photoList;
 
     public Long getId() {
         return id;

@@ -1,35 +1,21 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Inheritance(strategy= InheritanceType.JOINED)
-public class Activity implements Serializable {
+public class Photo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
     @Lob
     private byte[] photo;
-    private String type;
-    private String notes;
+    private String name;
 
     public Long getId() {
         return id;
@@ -39,6 +25,22 @@ public class Activity implements Serializable {
         this.id = id;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -49,10 +51,10 @@ public class Activity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Activity)) {
+        if (!(object instanceof Photo)) {
             return false;
         }
-        Activity other = (Activity) object;
+        Photo other = (Photo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -61,7 +63,7 @@ public class Activity implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Activity[ id=" + id + " ]";
+        return "entity.Photo[ id=" + id + " ]";
     }
     
 }

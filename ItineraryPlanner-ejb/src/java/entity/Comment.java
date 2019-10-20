@@ -16,14 +16,12 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String description;
+    private String comment;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     
     @ManyToOne
     private Users user;
-    @ManyToOne
-    private Itinerary itinerary;
     
     public Long getId() {
         return id;
@@ -33,6 +31,30 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

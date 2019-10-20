@@ -1,14 +1,17 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Users implements Serializable {
@@ -22,12 +25,18 @@ public class Users implements Serializable {
     private String userName;
     private String password;
     private String email;
-    private boolean isAdmin;
-
+    private String description;
+    @Lob
+    private byte[] profilepic;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthday;
+    private String instaURL;
+    private String blogURL;
+    
     @ManyToMany
     private List<Itinerary> itineraryList;
-    @ManyToMany
-    private List<Hashtag> hashtagList;
     @OneToMany(mappedBy = "user")
     private List<Comment> commentList;
 
@@ -79,12 +88,52 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getProfilepic() {
+        return profilepic;
+    }
+
+    public void setProfilepic(byte[] profilepic) {
+        this.profilepic = profilepic;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getInstaURL() {
+        return instaURL;
+    }
+
+    public void setInstaURL(String instaURL) {
+        this.instaURL = instaURL;
+    }
+
+    public String getBlogURL() {
+        return blogURL;
+    }
+
+    public void setBlogURL(String blogURL) {
+        this.blogURL = blogURL;
     }
 
     public List<Itinerary> getItineraryList() {
@@ -95,15 +144,6 @@ public class Users implements Serializable {
         this.itineraryList = itineraryList;
     }
 
-    public void addItinerary(Itinerary i) {
-        this.itineraryList.add(i);
-        //this.itineraryList.sort();
-    }
-
-    public void removeItinerary(Itinerary i) {
-        this.itineraryList.remove(i);
-    }
-
     public List<Comment> getCommentList() {
         return commentList;
     }
@@ -112,14 +152,6 @@ public class Users implements Serializable {
         this.commentList = commentList;
     }
 
-    public void addComment(Comment c) {
-        this.commentList.add(c);
-        //this.itineraryList.sort();
-    }
-
-    public void removeComment(Comment c) {
-        this.commentList.remove(c);
-    }
 
     @Override
     public int hashCode() {
